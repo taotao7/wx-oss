@@ -1,4 +1,4 @@
-type optionsType = {
+export type optionsType = {
   accessKeyId: String;
   accessKeySecret: String;
   region?: String;

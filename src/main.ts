@@ -1,6 +1,9 @@
 import initOptions from "./utils/initOptions";
+import { optionsType } from "./types/optionsType";
+import request from "./utils/request";
 class Client {
-  options: optionsType = {
+  private static instance: Client;
+  protected options: optionsType = {
     accessKeyId: "",
     accessKeySecret: "",
     region: "oss-cn-hangzhou",
@@ -18,11 +21,26 @@ class Client {
     retryMax: 0,
   };
 
-  constructor(options: optionsType) {
+  private constructor(options: optionsType) {
     this.initOptions(options);
   }
 
+  public static getInstance(options: optionsType) {
+    if (!Client.instance) {
+      Client.instance = new Client(options);
+    }
+    return Client.instance;
+  }
+
   initOptions = initOptions;
+  request = request;
 }
 
-new Client({ accessKeyId: "1213312", accessKeySecret: "123123123" });
+const client = Client.getInstance({
+  accessKeyId: "asdasd",
+  accessKeySecret: "1231323",
+});
+
+client.request();
+
+export default Client;

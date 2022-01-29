@@ -4,19 +4,14 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, (global["oss-wx"] = global["oss-wx"] || {}, global["oss-wx"].js = factory()));
 })(this, (function () { 'use strict';
 
-    var main = {};
-
-    var initOptions = {};
-
-    Object.defineProperty(initOptions, "__esModule", { value: true });
-    function default_1(options) {
-        this.options = Object.assign({}, options);
-        console.log("test------>");
+    function initOptions (options) {
+        this.options = Object.assign(this.options, options);
     }
-    initOptions.default = default_1;
 
-    Object.defineProperty(main, "__esModule", { value: true });
-    const initOptions_1 = initOptions;
+    function request () {
+        console.log("request method", this.options);
+    }
+
     class Client {
         constructor(options) {
             this.options = {
@@ -36,13 +31,29 @@
                 refreshSTSTokenInterval: 60000 * 5,
                 retryMax: 0,
             };
-            this.initOptions = initOptions_1.default;
+            this.initOptions = initOptions;
+            this.request = request;
             this.initOptions(options);
         }
+        static getInstance(options) {
+            if (!Client.instance) {
+                Client.instance = new Client(options);
+            }
+            return Client.instance;
+        }
     }
-    new Client({ accessKeyId: "1213312", accessKeySecret: "123123123" });
+    const client = Client.getInstance({
+        accessKeyId: "asdasd",
+        accessKeySecret: "1231323",
+    });
+    const client2 = Client.getInstance({
+        accessKeyId: "xxxxxx",
+        accessKeySecret: "xxxxxxxx",
+    });
+    client.request();
+    client2.request();
 
-    return main;
+    return Client;
 
 }));
 //# sourceMappingURL=oss-wx.js.map
