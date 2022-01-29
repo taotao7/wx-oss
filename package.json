@@ -1,0 +1,22 @@
+{
+  "name": "oss-wechat-signature",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/oss-wx.js",
+  "scripts": {
+    "build": "tsc && rollup --config ./rollup.config.js --configPlugin typescript"
+  },
+  "keywords": [],
+  "author": "taotao7<moca_tao7@foxmail.com> (https://github.com/taotao7)",
+  "license": "MIT",
+  "dependencies": {
+    "crypto-js": "^4.1.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "rollup": "^2.66.1",
+    "typescript": "^4.5.5"
+  }
+}
